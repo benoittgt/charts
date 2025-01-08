@@ -85,7 +85,7 @@ EXAMPLE USAGE: {{ include "airflow.init_container.check_db" (dict "Release" .Rel
     {{- if .Values.airflow.legacyCommands }}
     - "exec timeout 60s airflow checkdb"
     {{- else }}
-    - "exec timeout 60s airflow db check"
+    - "exec bash -c 'timeout 60s airflow db check; exit_code=$?; if [ $exit_code -eq 124 ]; then echo \"Database connection check timed out after 60s\"; elif [ $exit_code -ne 0 ]; then echo \"Database check failed with code $exit_code\"; fi; exit $exit_code'"
     {{- end }}
   {{- if .volumeMounts }}
   volumeMounts:
