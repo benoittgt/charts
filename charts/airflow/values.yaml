@@ -1951,6 +1951,10 @@ pgbouncer:
     ##
     minAvailable:
 
+  ## the number of replica count. Careful, each pgbouncer instance maintains its own connection pool
+  ##
+  replicaCount: 1
+
   ## configs for the pgbouncer Pods' liveness probe
   ##
   livenessProbe:
